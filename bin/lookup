@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Doing this because osx messes up the PATH for GUI apps
+if [[ -z `which node` ]]; then
+    # trying to use nvm to locate node
+    NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+fi
+
+if [[ -z `which node` ]]; then
+    echo "NO NODE INSTALLATION FOUND"
+    exit 1
+fi
+
+exec node "${DIR}/../cli.js" "$@"
