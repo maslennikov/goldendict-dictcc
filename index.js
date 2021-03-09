@@ -24,7 +24,7 @@ function urlForTerm(term) {
     };
 
     var lang = term.match(/[а-яА-Я]/) ? 'deru' : 'deen';
-    return langs[lang] + '?s=' + term;
+    return langs[lang] + '?s=' + encodeURIComponent(term);
 }
 
 function stripBody(html) {
