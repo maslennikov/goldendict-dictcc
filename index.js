@@ -30,5 +30,6 @@ function urlForTerm(term) {
 function stripBody(html) {
   var $ = cheerio.load(html);
   var results = $.html('body > div > dl')
-  return results && `<div class="dictcc">${results}</div>`
+  var absUrlsResults = results.toString().replace(/href=\"\/\?/g, 'href=\"http://pocket.dict.cc/?')
+  return absUrlsResults && `<div class="dictcc">${absUrlsResults}</div>`
 }
