@@ -24,11 +24,12 @@ function urlForTerm(term) {
     };
 
     var lang = term.match(/[а-яА-Я]/) ? 'deru' : 'deen';
-    return langs[lang] + '?s=' + term;
+    return langs[lang] + '?s=' + encodeURIComponent(term);
 }
 
 function stripBody(html) {
   var $ = cheerio.load(html);
   var results = $.html('body > div > dl')
-  return results && `<div class="dictcc">${results}</div>`
+  var absUrlsResults = results.toString().replace(/href=\"\/\?/g, 'href=\"http://pocket.dict.cc/?')
+  return absUrlsResults && `<div class="dictcc">${absUrlsResults}</div>`
 }
